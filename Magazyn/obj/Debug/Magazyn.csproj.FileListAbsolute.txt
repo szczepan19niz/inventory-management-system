@@ -1,0 +1,17 @@
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\Magazyn.exe.config
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\Magazyn.exe
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\Magazyn.pdb
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.csprojAssemblyReference.cache
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.Properties.Resources.resources
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.csproj.GenerateResource.cache
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.csproj.CoreCompileInputs.cache
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.exe
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.pdb
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.Main.resources
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\MetroFramework.Design.dll
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\MetroFramework.dll
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.csproj.CopyComplete
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.Produkty.resources
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\MySql.Data.dll
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\MySql.Data.xml
