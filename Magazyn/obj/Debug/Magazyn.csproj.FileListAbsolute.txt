@@ -12,6 +12,8 @@ C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\MetroFramework.Design.d
 C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\MetroFramework.dll
 C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\MetroFramework.Fonts.dll
 C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.csproj.CopyComplete
-C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.Produkty.resources
 C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\MySql.Data.dll
 C:\Users\Szczepan\source\repos\Magazyn\Magazyn\bin\Debug\MySql.Data.xml
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.Product.resources
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.Category.resources
+C:\Users\Szczepan\source\repos\Magazyn\Magazyn\obj\Debug\Magazyn.Unit.resources

@@ -27,14 +27,9 @@ namespace Magazyn
             this.Left = 0;
         }
 
-        private void Main_Load(object sender, EventArgs e)
+        private void dodajProduktToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            Produkty p = new Produkty();
+            Product p = new Product();
             p.TopLevel = false;
             panel1.Controls.Add(p);
             p.BringToFront();
@@ -42,6 +37,20 @@ namespace Magazyn
             p.GetUnit();
             p.Show();
             p.LoadProduct();
+        }
+
+        private void dodajKategorieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Category p = new Category();
+            p.LoadCategory();
+            p.Show();
+        }
+
+        private void dodajJednostkęToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Unit p = new Unit();
+            p.LoadUnit();
+            p.Show();
         }
     }
 }

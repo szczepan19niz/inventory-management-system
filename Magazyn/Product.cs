@@ -11,7 +11,7 @@ using MySql.Data.MySqlClient;
 
 namespace Magazyn
 {
-    public partial class Produkty : Form
+    public partial class Product : Form
     {
         MySqlConnection cn;
         MySqlCommand cm;
@@ -20,7 +20,7 @@ namespace Magazyn
 
         string skuCode;
 
-        public Produkty()
+        public Product()
         {
             InitializeComponent();
 
@@ -67,7 +67,7 @@ namespace Magazyn
         {
             cboCategory.Items.Clear();
             cboCategorySearch.Items.Clear();
-            cboCategorySearch.Items.Add("ALL");
+            cboCategorySearch.Items.Add("Wszystko");
             cboCategory.Text = "";
             cn.Open();
             cm = new MySqlCommand("Select * from tblkategoria", cn);
@@ -187,17 +187,13 @@ namespace Magazyn
                 cm.Parameters.AddWithValue("@Kategoria", cboCategory.Text);
                 cm.Parameters.AddWithValue("@Jednostka", cboUnit.Text);
                 cm.Parameters.AddWithValue("@Ilosc", double.Parse(txtQty.Text));
+
                 cm.ExecuteNonQuery();
                 cn.Close();
 
                 //wyczyszczenie okien po dodaniu produkty
                 MessageBox.Show("Produkt został dodany do bazy!!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                cboCategory.Text = string.Empty;
-                cboUnit.Text = string.Empty;
-                txtCode.Text = string.Empty;
-                txtName.Text = string.Empty;
-                txtQty.Text = string.Empty;
-
+                Clear();
             }
             catch (Exception ex)
             {
@@ -213,8 +209,9 @@ namespace Magazyn
             dataGridView1.Rows.Clear();
             cn.Open();
 
-            if(cboCategorySearch.Text == "ALL")
+            if(cboCategorySearch.Text == "Wszystko")
             {
+
                 cm = new MySqlCommand("select * from tbl_produkt where Nazwa like '%" +  txtSearch.Text + "%'", cn);
             }
             else
@@ -238,14 +235,16 @@ namespace Magazyn
             LoadProduct();
         }
 
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             int i = dataGridView1.CurrentRow.Index;
             skuCode = dataGridView1[1, i].Value.ToString(); 
-
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+ 
+        //wyświetlanie danych z okna wyszukiwania do okna dodawania
+        private void dataGridView1_Click(object sender, EventArgs e)
         {
             cn.Open();
             cm = new MySqlCommand("select * from tbl_produkt where KodKreskowy = '" + skuCode + "'", cn);
@@ -254,12 +253,121 @@ namespace Magazyn
             if (dr.HasRows)
             {
                 txtCode.Text = dr["KodKreskowy"].ToString();
+                txtName.Text = dr["Nazwa"].ToString();
+                cboCategory.Text = dr["Kategoria"].ToString();
+                cboUnit.Text = dr["Jednostka"].ToString();
+                txtQty.Text = dr["Ilosc"].ToString();
 
+                addButton.Enabled = false;
+                updateButton.Enabled = true;
+                saveButton.Enabled = false;
+                txtCode.Enabled = false;
             }
-
             dr.Close();
             cn.Close();
         }
 
+
+        //przycisk Anuluj
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            Clear();
+          }
+
+
+        //czyszczenie okien
+        public void Clear()
+        {
+            addButton.Enabled = true;
+            saveButton.Enabled = true;
+            updateButton.Enabled = true;
+            deleteButton.Enabled = true;
+            txtCode.Enabled = true;
+
+            cboCategory.Text = string.Empty;
+            cboUnit.Text = string.Empty;
+            txtCode.Text = string.Empty;
+            txtName.Text = string.Empty;
+            txtQty.Text = "0.00";
+        }
+
+
+        //edycja danych
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Czy chcesz edytować ten wpis?", "Magazyn Item Service", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (txtCode.Text == "" || txtName.Text == "" || cboCategory.Text == "" ||
+                        cboUnit.Text == "" || (txtQty.Text == "" || txtQty.Text == "0"))
+                    {
+                        MessageBox.Show("Uzupełnij dane!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    cn.Open();
+                    cm = new MySqlCommand("update tbl_produkt set KodKreskowy=@KodKreskowy, Nazwa=@Nazwa, Kategoria=@Kategoria, Jednostka=@Jednostka, Ilosc=@Ilosc where KodKreskowy=@KodKreskowy", cn);
+                    cm.Parameters.AddWithValue("@KodKreskowy", txtCode.Text);
+                    cm.Parameters.AddWithValue("@Nazwa", txtName.Text);
+                    cm.Parameters.AddWithValue("@Kategoria", cboCategory.Text);
+                    cm.Parameters.AddWithValue("@Jednostka", cboUnit.Text);
+                    cm.Parameters.AddWithValue("@Ilosc", double.Parse(txtQty.Text));
+                    cm.ExecuteNonQuery();
+                    cn.Close();
+
+                    //wyczyszczenie okien po dodaniu produkty
+                    MessageBox.Show("Dane produktu zostały zaaktualizowane!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                cn.Close();
+                MessageBox.Show(ex.Message, "Błąd!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+
+        //przycisk usuń
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Czy chcesz usunąć ten wpis?", "Magazyn Item Service", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    int i = dataGridView1.CurrentRow.Index;
+                    skuCode = dataGridView1[1, i].Value.ToString();
+
+                    Console.Write(skuCode);
+
+                    cn.Open();
+                    cm = new MySqlCommand("delete from tbl_produkt where KodKreskowy = '" + skuCode + "'", cn);
+                    cm.ExecuteNonQuery();
+                    cn.Close();
+
+                    MessageBox.Show("Produkt został usunięty!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Clear();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                cn.Close();
+                MessageBox.Show(ex.Message, "Błąd!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void cboCategorySearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            txtSearch.Text = "";
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            Clear();
+            GetUnit();
+            GetCategory();
+        }
     }
 }

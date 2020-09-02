@@ -1,6 +1,6 @@
 ﻿namespace Magazyn
 {
-    partial class Produkty
+    partial class Product
     {
         /// <summary>
         /// Required designer variable.
@@ -67,6 +67,7 @@
             this.cboCategorySearch = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.refreshButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -83,7 +84,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1221, 72);
+            this.panel1.Size = new System.Drawing.Size(1221, 54);
             this.panel1.TabIndex = 0;
             // 
             // label10
@@ -92,7 +93,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(1071, 19);
+            this.label10.Location = new System.Drawing.Point(1070, 9);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(129, 30);
             this.label10.TabIndex = 1;
@@ -104,7 +105,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(13, 19);
+            this.label1.Location = new System.Drawing.Point(13, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(122, 30);
             this.label1.TabIndex = 0;
@@ -115,9 +116,9 @@
             this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 72);
+            this.panel2.Location = new System.Drawing.Point(0, 54);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1221, 598);
+            this.panel2.Size = new System.Drawing.Size(1221, 616);
             this.panel2.TabIndex = 1;
             // 
             // tabControl1
@@ -129,11 +130,12 @@
             this.tabControl1.Location = new System.Drawing.Point(595, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(626, 598);
+            this.tabControl1.Size = new System.Drawing.Size(626, 616);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.refreshButton);
             this.tabPage1.Controls.Add(this.addButton);
             this.tabPage1.Controls.Add(this.cancelButton);
             this.tabPage1.Controls.Add(this.deleteButton);
@@ -157,18 +159,19 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(618, 562);
+            this.tabPage1.Size = new System.Drawing.Size(618, 580);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Informacje o produkcie";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // addButton
             // 
-            this.addButton.BackColor = System.Drawing.Color.Green;
+            this.addButton.BackColor = System.Drawing.Color.ForestGreen;
+            this.addButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addButton.FlatAppearance.BorderSize = 0;
             this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.addButton.Location = new System.Drawing.Point(75, 274);
+            this.addButton.Location = new System.Drawing.Point(117, 277);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(82, 33);
             this.addButton.TabIndex = 22;
@@ -178,49 +181,56 @@
             // cancelButton
             // 
             this.cancelButton.BackColor = System.Drawing.Color.DarkGray;
+            this.cancelButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.cancelButton.Location = new System.Drawing.Point(437, 274);
+            this.cancelButton.Location = new System.Drawing.Point(479, 277);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(82, 33);
             this.cancelButton.TabIndex = 21;
             this.cancelButton.Text = "Anuluj";
             this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // deleteButton
             // 
             this.deleteButton.BackColor = System.Drawing.Color.DimGray;
+            this.deleteButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteButton.FlatAppearance.BorderSize = 0;
             this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.deleteButton.Location = new System.Drawing.Point(349, 274);
+            this.deleteButton.Location = new System.Drawing.Point(391, 277);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(82, 33);
             this.deleteButton.TabIndex = 20;
             this.deleteButton.Text = "Usuń";
             this.deleteButton.UseVisualStyleBackColor = false;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // updateButton
             // 
             this.updateButton.BackColor = System.Drawing.Color.DimGray;
+            this.updateButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.updateButton.FlatAppearance.BorderSize = 0;
             this.updateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updateButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.updateButton.Location = new System.Drawing.Point(251, 274);
+            this.updateButton.Location = new System.Drawing.Point(293, 277);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(92, 33);
             this.updateButton.TabIndex = 19;
             this.updateButton.Text = "Aktualizuj";
             this.updateButton.UseVisualStyleBackColor = false;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // saveButton
             // 
-            this.saveButton.BackColor = System.Drawing.Color.DimGray;
+            this.saveButton.BackColor = System.Drawing.Color.ForestGreen;
+            this.saveButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.saveButton.FlatAppearance.BorderSize = 0;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.saveButton.Location = new System.Drawing.Point(163, 274);
+            this.saveButton.Location = new System.Drawing.Point(205, 277);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(82, 33);
             this.saveButton.TabIndex = 18;
@@ -231,11 +241,12 @@
             // deleteUnitButton
             // 
             this.deleteUnitButton.BackColor = System.Drawing.Color.DimGray;
+            this.deleteUnitButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteUnitButton.FlatAppearance.BorderSize = 0;
             this.deleteUnitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteUnitButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.deleteUnitButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.deleteUnitButton.Location = new System.Drawing.Point(476, 180);
+            this.deleteUnitButton.Location = new System.Drawing.Point(526, 180);
             this.deleteUnitButton.Name = "deleteUnitButton";
             this.deleteUnitButton.Size = new System.Drawing.Size(33, 31);
             this.deleteUnitButton.TabIndex = 15;
@@ -246,11 +257,12 @@
             // deleteCategoryButton
             // 
             this.deleteCategoryButton.BackColor = System.Drawing.Color.DimGray;
+            this.deleteCategoryButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.deleteCategoryButton.FlatAppearance.BorderSize = 0;
             this.deleteCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteCategoryButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.deleteCategoryButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.deleteCategoryButton.Location = new System.Drawing.Point(476, 145);
+            this.deleteCategoryButton.Location = new System.Drawing.Point(526, 145);
             this.deleteCategoryButton.Name = "deleteCategoryButton";
             this.deleteCategoryButton.Size = new System.Drawing.Size(33, 31);
             this.deleteCategoryButton.TabIndex = 14;
@@ -261,11 +273,12 @@
             // addUnitButton
             // 
             this.addUnitButton.BackColor = System.Drawing.Color.DimGray;
+            this.addUnitButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addUnitButton.FlatAppearance.BorderSize = 0;
             this.addUnitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addUnitButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.addUnitButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.addUnitButton.Location = new System.Drawing.Point(437, 180);
+            this.addUnitButton.Location = new System.Drawing.Point(487, 180);
             this.addUnitButton.Name = "addUnitButton";
             this.addUnitButton.Size = new System.Drawing.Size(33, 31);
             this.addUnitButton.TabIndex = 13;
@@ -276,11 +289,12 @@
             // addCategoryButton
             // 
             this.addCategoryButton.BackColor = System.Drawing.Color.DimGray;
+            this.addCategoryButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addCategoryButton.FlatAppearance.BorderSize = 0;
             this.addCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addCategoryButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.addCategoryButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.addCategoryButton.Location = new System.Drawing.Point(437, 145);
+            this.addCategoryButton.Location = new System.Drawing.Point(487, 145);
             this.addCategoryButton.Name = "addCategoryButton";
             this.addCategoryButton.Size = new System.Drawing.Size(33, 31);
             this.addCategoryButton.TabIndex = 12;
@@ -290,18 +304,20 @@
             // 
             // cboUnit
             // 
+            this.cboUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUnit.FormattingEnabled = true;
             this.cboUnit.Location = new System.Drawing.Point(171, 180);
             this.cboUnit.Name = "cboUnit";
-            this.cboUnit.Size = new System.Drawing.Size(250, 31);
+            this.cboUnit.Size = new System.Drawing.Size(299, 31);
             this.cboUnit.TabIndex = 11;
             // 
             // cboCategory
             // 
+            this.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCategory.FormattingEnabled = true;
             this.cboCategory.Location = new System.Drawing.Point(171, 145);
             this.cboCategory.Name = "cboCategory";
-            this.cboCategory.Size = new System.Drawing.Size(250, 31);
+            this.cboCategory.Size = new System.Drawing.Size(299, 31);
             this.cboCategory.TabIndex = 10;
             // 
             // label9
@@ -317,7 +333,7 @@
             // 
             this.txtQty.Location = new System.Drawing.Point(171, 216);
             this.txtQty.Name = "txtQty";
-            this.txtQty.Size = new System.Drawing.Size(250, 30);
+            this.txtQty.Size = new System.Drawing.Size(299, 30);
             this.txtQty.TabIndex = 8;
             this.txtQty.Text = "0.00";
             // 
@@ -325,14 +341,14 @@
             // 
             this.txtName.Location = new System.Drawing.Point(171, 110);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(250, 30);
+            this.txtName.Size = new System.Drawing.Size(299, 30);
             this.txtName.TabIndex = 6;
             // 
             // txtCode
             // 
             this.txtCode.Location = new System.Drawing.Point(171, 75);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(250, 30);
+            this.txtCode.Size = new System.Drawing.Size(299, 30);
             this.txtCode.TabIndex = 5;
             // 
             // label8
@@ -387,7 +403,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 32);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(618, 562);
+            this.tabPage2.Size = new System.Drawing.Size(618, 580);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -406,12 +422,14 @@
             this.panel3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(595, 598);
+            this.panel3.Size = new System.Drawing.Size(595, 616);
             this.panel3.TabIndex = 3;
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -441,10 +459,10 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(574, 452);
+            this.dataGridView1.Size = new System.Drawing.Size(574, 470);
             this.dataGridView1.TabIndex = 5;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
             // Column1
             // 
@@ -507,6 +525,7 @@
             this.cboCategorySearch.Name = "cboCategorySearch";
             this.cboCategorySearch.Size = new System.Drawing.Size(269, 31);
             this.cboCategorySearch.TabIndex = 2;
+            this.cboCategorySearch.SelectedIndexChanged += new System.EventHandler(this.cboCategorySearch_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -529,7 +548,22 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "WYSZUKAJ";
             // 
-            // Produkty
+            // refreshButton
+            // 
+            this.refreshButton.BackColor = System.Drawing.Color.ForestGreen;
+            this.refreshButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.refreshButton.FlatAppearance.BorderSize = 0;
+            this.refreshButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.refreshButton.ForeColor = System.Drawing.SystemColors.Info;
+            this.refreshButton.Location = new System.Drawing.Point(117, 327);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(82, 33);
+            this.refreshButton.TabIndex = 23;
+            this.refreshButton.Text = "Odśwież";
+            this.refreshButton.UseVisualStyleBackColor = false;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
+            // Product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -539,7 +573,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Produkty";
+            this.Name = "Product";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -563,7 +597,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button updateButton;
@@ -595,5 +628,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button refreshButton;
     }
 }
