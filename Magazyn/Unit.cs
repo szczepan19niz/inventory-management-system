@@ -73,6 +73,7 @@ namespace Magazyn
                 {
                     cm = new MySqlCommand("select * from tbljednostka where Jednostka like '%" + txtUnit.Text + "%'", cn);
                 }
+
                 dr = cm.ExecuteReader();
                 while (dr.Read())
                 {

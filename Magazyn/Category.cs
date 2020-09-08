@@ -76,6 +76,7 @@ namespace Magazyn
                 {
                     cm = new MySqlCommand("select * from tblkategoria where Kategoria like '%" + txtCategory.Text + "%'", cn);
                 }
+
                 dr = cm.ExecuteReader();
                 while (dr.Read())
                 {

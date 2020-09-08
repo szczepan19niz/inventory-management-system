@@ -42,6 +42,8 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +53,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(20, 134);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1166, 476);
+            this.panel1.Size = new System.Drawing.Size(1467, 476);
             this.panel1.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -65,7 +67,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1166, 74);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1467, 74);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // toolStrip1
@@ -81,17 +83,19 @@
             this.toolStripSeparator2,
             this.toolStripButton3,
             this.toolStripSeparator3,
-            this.toolStripButton4});
+            this.toolStripButton4,
+            this.toolStripSeparator4,
+            this.toolStripButton5});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStrip1.Size = new System.Drawing.Size(1166, 74);
+            this.toolStrip1.Size = new System.Drawing.Size(1467, 74);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripButton2
             // 
-            this.toolStripButton2.Image = global::Magazyn.Properties.Resources.search_icon;
+            this.toolStripButton2.Image = global::Magazyn.Properties.Resources.search_512;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(113, 71);
@@ -142,12 +146,12 @@
             // 
             // toolStripButton3
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.Image = global::Magazyn.Properties.Resources.refresh;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(24, 71);
-            this.toolStripButton3.Text = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(97, 71);
+            this.toolStripButton3.Text = "Odśwież";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // toolStripSeparator3
             // 
@@ -156,18 +160,32 @@
             // 
             // toolStripButton4
             // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(24, 71);
-            this.toolStripButton4.Text = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(137, 71);
+            this.toolStripButton4.Text = "Kod kreskowy";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 74);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(24, 71);
+            this.toolStripButton5.Text = "toolStripButton5";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1206, 630);
+            this.ClientSize = new System.Drawing.Size(1507, 630);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Main";
@@ -195,5 +213,7 @@
         private System.Windows.Forms.ToolStripMenuItem dodajKategorieToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dodajJednostkęToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dodajProduktToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
     }
 }

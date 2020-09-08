@@ -52,5 +52,24 @@ namespace Magazyn
             p.LoadUnit();
             p.Show();
         }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            Product p = new Product();
+            p.TopLevel = false;
+            panel1.Controls.Add(p);
+            p.BringToFront();
+            p.Clear();
+            p.GetCategory();
+            p.GetUnit();
+            p.Show();
+            p.LoadProduct(); 
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            Barcode_gen p = new Barcode_gen();
+            p.Show();
+        }
     }
 }

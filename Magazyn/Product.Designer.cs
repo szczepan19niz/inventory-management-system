@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
@@ -35,7 +36,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.addButton = new System.Windows.Forms.Button();
+            this.picBarcode = new System.Windows.Forms.PictureBox();
+            this.descriptionBox = new System.Windows.Forms.TextBox();
+            this.txtQty = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtCode = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.refreshButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
@@ -47,15 +54,11 @@
             this.cboUnit = new System.Windows.Forms.ComboBox();
             this.cboCategory = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtQty = new System.Windows.Forms.TextBox();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.txtCode = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.INFORMACJE = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,11 +70,13 @@
             this.cboCategorySearch = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.refreshButton = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBarcode)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -84,7 +89,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1221, 54);
+            this.panel1.Size = new System.Drawing.Size(1505, 54);
             this.panel1.TabIndex = 0;
             // 
             // label10
@@ -93,7 +98,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(1070, 9);
+            this.label10.Location = new System.Drawing.Point(1364, 9);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(129, 30);
             this.label10.TabIndex = 1;
@@ -118,25 +123,29 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 54);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1221, 616);
+            this.panel2.Size = new System.Drawing.Size(1505, 603);
             this.panel2.TabIndex = 1;
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.tabControl1.Location = new System.Drawing.Point(595, 0);
+            this.tabControl1.Location = new System.Drawing.Point(548, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(626, 616);
+            this.tabControl1.Size = new System.Drawing.Size(957, 603);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.picBarcode);
+            this.tabPage1.Controls.Add(this.descriptionBox);
+            this.tabPage1.Controls.Add(this.txtQty);
+            this.tabPage1.Controls.Add(this.txtName);
+            this.tabPage1.Controls.Add(this.txtCode);
+            this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.refreshButton);
-            this.tabPage1.Controls.Add(this.addButton);
             this.tabPage1.Controls.Add(this.cancelButton);
             this.tabPage1.Controls.Add(this.deleteButton);
             this.tabPage1.Controls.Add(this.updateButton);
@@ -148,9 +157,6 @@
             this.tabPage1.Controls.Add(this.cboUnit);
             this.tabPage1.Controls.Add(this.cboCategory);
             this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Controls.Add(this.txtQty);
-            this.tabPage1.Controls.Add(this.txtName);
-            this.tabPage1.Controls.Add(this.txtCode);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.label6);
@@ -159,24 +165,74 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(618, 580);
+            this.tabPage1.Size = new System.Drawing.Size(949, 567);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Informacje o produkcie";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // addButton
+            // picBarcode
             // 
-            this.addButton.BackColor = System.Drawing.Color.ForestGreen;
-            this.addButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addButton.FlatAppearance.BorderSize = 0;
-            this.addButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.addButton.Location = new System.Drawing.Point(117, 277);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(82, 33);
-            this.addButton.TabIndex = 22;
-            this.addButton.Text = "Dodaj";
-            this.addButton.UseVisualStyleBackColor = false;
+            this.picBarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picBarcode.Location = new System.Drawing.Point(460, 67);
+            this.picBarcode.Name = "picBarcode";
+            this.picBarcode.Size = new System.Drawing.Size(200, 70);
+            this.picBarcode.TabIndex = 26;
+            this.picBarcode.TabStop = false;
+            // 
+            // descriptionBox
+            // 
+            this.descriptionBox.Location = new System.Drawing.Point(136, 150);
+            this.descriptionBox.Multiline = true;
+            this.descriptionBox.Name = "descriptionBox";
+            this.descriptionBox.Size = new System.Drawing.Size(299, 78);
+            this.descriptionBox.TabIndex = 25;
+            // 
+            // txtQty
+            // 
+            this.txtQty.Location = new System.Drawing.Point(136, 305);
+            this.txtQty.Name = "txtQty";
+            this.txtQty.Size = new System.Drawing.Size(299, 30);
+            this.txtQty.TabIndex = 8;
+            this.txtQty.Text = "0";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(136, 107);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(299, 30);
+            this.txtName.TabIndex = 6;
+            // 
+            // txtCode
+            // 
+            this.txtCode.Location = new System.Drawing.Point(136, 72);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(299, 30);
+            this.txtCode.TabIndex = 5;
+            this.txtCode.TextChanged += new System.EventHandler(this.txtCode_TextChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(78, 153);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(44, 23);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "Opis";
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.BackColor = System.Drawing.Color.ForestGreen;
+            this.refreshButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.refreshButton.FlatAppearance.BorderSize = 0;
+            this.refreshButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.refreshButton.ForeColor = System.Drawing.SystemColors.Info;
+            this.refreshButton.Location = new System.Drawing.Point(41, 362);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(81, 33);
+            this.refreshButton.TabIndex = 23;
+            this.refreshButton.Text = "Odśwież";
+            this.refreshButton.UseVisualStyleBackColor = false;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
             // cancelButton
             // 
@@ -185,7 +241,7 @@
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.cancelButton.Location = new System.Drawing.Point(479, 277);
+            this.cancelButton.Location = new System.Drawing.Point(460, 362);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(82, 33);
             this.cancelButton.TabIndex = 21;
@@ -200,7 +256,7 @@
             this.deleteButton.FlatAppearance.BorderSize = 0;
             this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.deleteButton.Location = new System.Drawing.Point(391, 277);
+            this.deleteButton.Location = new System.Drawing.Point(353, 362);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(82, 33);
             this.deleteButton.TabIndex = 20;
@@ -215,7 +271,7 @@
             this.updateButton.FlatAppearance.BorderSize = 0;
             this.updateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updateButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.updateButton.Location = new System.Drawing.Point(293, 277);
+            this.updateButton.Location = new System.Drawing.Point(237, 362);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(92, 33);
             this.updateButton.TabIndex = 19;
@@ -230,7 +286,7 @@
             this.saveButton.FlatAppearance.BorderSize = 0;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.saveButton.Location = new System.Drawing.Point(205, 277);
+            this.saveButton.Location = new System.Drawing.Point(136, 362);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(82, 33);
             this.saveButton.TabIndex = 18;
@@ -246,7 +302,7 @@
             this.deleteUnitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteUnitButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.deleteUnitButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.deleteUnitButton.Location = new System.Drawing.Point(526, 180);
+            this.deleteUnitButton.Location = new System.Drawing.Point(499, 269);
             this.deleteUnitButton.Name = "deleteUnitButton";
             this.deleteUnitButton.Size = new System.Drawing.Size(33, 31);
             this.deleteUnitButton.TabIndex = 15;
@@ -262,7 +318,7 @@
             this.deleteCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteCategoryButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.deleteCategoryButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.deleteCategoryButton.Location = new System.Drawing.Point(526, 145);
+            this.deleteCategoryButton.Location = new System.Drawing.Point(499, 234);
             this.deleteCategoryButton.Name = "deleteCategoryButton";
             this.deleteCategoryButton.Size = new System.Drawing.Size(33, 31);
             this.deleteCategoryButton.TabIndex = 14;
@@ -278,7 +334,7 @@
             this.addUnitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addUnitButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.addUnitButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.addUnitButton.Location = new System.Drawing.Point(487, 180);
+            this.addUnitButton.Location = new System.Drawing.Point(460, 269);
             this.addUnitButton.Name = "addUnitButton";
             this.addUnitButton.Size = new System.Drawing.Size(33, 31);
             this.addUnitButton.TabIndex = 13;
@@ -294,7 +350,7 @@
             this.addCategoryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addCategoryButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.addCategoryButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.addCategoryButton.Location = new System.Drawing.Point(487, 145);
+            this.addCategoryButton.Location = new System.Drawing.Point(460, 234);
             this.addCategoryButton.Name = "addCategoryButton";
             this.addCategoryButton.Size = new System.Drawing.Size(33, 31);
             this.addCategoryButton.TabIndex = 12;
@@ -306,7 +362,7 @@
             // 
             this.cboUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUnit.FormattingEnabled = true;
-            this.cboUnit.Location = new System.Drawing.Point(171, 180);
+            this.cboUnit.Location = new System.Drawing.Point(136, 269);
             this.cboUnit.Name = "cboUnit";
             this.cboUnit.Size = new System.Drawing.Size(299, 31);
             this.cboUnit.TabIndex = 11;
@@ -315,7 +371,7 @@
             // 
             this.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCategory.FormattingEnabled = true;
-            this.cboCategory.Location = new System.Drawing.Point(171, 145);
+            this.cboCategory.Location = new System.Drawing.Point(136, 234);
             this.cboCategory.Name = "cboCategory";
             this.cboCategory.Size = new System.Drawing.Size(299, 31);
             this.cboCategory.TabIndex = 10;
@@ -323,38 +379,16 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(74, 145);
+            this.label9.Location = new System.Drawing.Point(39, 234);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(83, 23);
             this.label9.TabIndex = 9;
             this.label9.Text = "Kategoria";
             // 
-            // txtQty
-            // 
-            this.txtQty.Location = new System.Drawing.Point(171, 216);
-            this.txtQty.Name = "txtQty";
-            this.txtQty.Size = new System.Drawing.Size(299, 30);
-            this.txtQty.TabIndex = 8;
-            this.txtQty.Text = "0.00";
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(171, 110);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(299, 30);
-            this.txtName.TabIndex = 6;
-            // 
-            // txtCode
-            // 
-            this.txtCode.Location = new System.Drawing.Point(171, 75);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(299, 30);
-            this.txtCode.TabIndex = 5;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(72, 180);
+            this.label8.Location = new System.Drawing.Point(37, 269);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(85, 23);
             this.label8.TabIndex = 4;
@@ -363,7 +397,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(113, 216);
+            this.label7.Location = new System.Drawing.Point(78, 305);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(44, 23);
             this.label7.TabIndex = 3;
@@ -372,7 +406,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(96, 110);
+            this.label6.Location = new System.Drawing.Point(61, 107);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(61, 23);
             this.label6.TabIndex = 2;
@@ -381,11 +415,13 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(44, 75);
+            this.label5.Cursor = System.Windows.Forms.Cursors.Help;
+            this.label5.Location = new System.Drawing.Point(9, 72);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(113, 23);
             this.label5.TabIndex = 1;
             this.label5.Text = "Kod kreskowy";
+            this.toolTip1.SetToolTip(this.label5, "Prawidłowy kod kreskowy musi zawierać 11 cyfr!\r\n");
             // 
             // INFORMACJE
             // 
@@ -397,16 +433,6 @@
             this.INFORMACJE.Size = new System.Drawing.Size(151, 30);
             this.INFORMACJE.TabIndex = 0;
             this.INFORMACJE.Text = "INFORMACJE";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 32);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(618, 580);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // panel3
             // 
@@ -422,7 +448,7 @@
             this.panel3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(595, 616);
+            this.panel3.Size = new System.Drawing.Size(548, 603);
             this.panel3.TabIndex = 3;
             // 
             // dataGridView1
@@ -459,7 +485,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(574, 470);
+            this.dataGridView1.Size = new System.Drawing.Size(517, 457);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
@@ -548,27 +574,16 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "WYSZUKAJ";
             // 
-            // refreshButton
+            // openFileDialog1
             // 
-            this.refreshButton.BackColor = System.Drawing.Color.ForestGreen;
-            this.refreshButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.refreshButton.FlatAppearance.BorderSize = 0;
-            this.refreshButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.refreshButton.ForeColor = System.Drawing.SystemColors.Info;
-            this.refreshButton.Location = new System.Drawing.Point(117, 327);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(82, 33);
-            this.refreshButton.TabIndex = 23;
-            this.refreshButton.Text = "Odśwież";
-            this.refreshButton.UseVisualStyleBackColor = false;
-            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1221, 670);
+            this.ClientSize = new System.Drawing.Size(1505, 657);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -582,6 +597,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBarcode)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -595,28 +611,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button deleteButton;
-        private System.Windows.Forms.Button updateButton;
-        private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Button deleteUnitButton;
-        private System.Windows.Forms.Button deleteCategoryButton;
-        private System.Windows.Forms.Button addUnitButton;
-        private System.Windows.Forms.Button addCategoryButton;
-        private System.Windows.Forms.ComboBox cboUnit;
-        private System.Windows.Forms.ComboBox cboCategory;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtQty;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtCode;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label INFORMACJE;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label4;
@@ -628,7 +622,32 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.PictureBox picBarcode;
+        private System.Windows.Forms.TextBox descriptionBox;
+        private System.Windows.Forms.TextBox txtQty;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox txtCode;
+        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button updateButton;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button deleteUnitButton;
+        private System.Windows.Forms.Button deleteCategoryButton;
+        private System.Windows.Forms.Button addUnitButton;
+        private System.Windows.Forms.Button addCategoryButton;
+        private System.Windows.Forms.ComboBox cboUnit;
+        private System.Windows.Forms.ComboBox cboCategory;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label INFORMACJE;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

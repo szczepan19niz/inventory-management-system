@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using BarcodeLib;
+using System.IO;
 
 namespace Magazyn
 {
@@ -35,12 +37,15 @@ namespace Magazyn
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            addButton.Enabled = false;
             saveButton.Enabled = true;
         }
 
         private void addCategoryButton_Click(object sender, EventArgs e)
         {
+            Category c = new Category();
+            c.Show();
+
+            /*
             try
             {
                 if(cboCategory.Text == "")
@@ -61,6 +66,7 @@ namespace Magazyn
                 cn.Close();
                 MessageBox.Show(ex.Message, "Błąd!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            */
         }
 
         public void GetCategory()
@@ -95,7 +101,9 @@ namespace Magazyn
                 cm.Parameters.AddWithValue("@Kategoria", cboCategory.Text);
                 cm.ExecuteNonQuery();
                 cn.Close();
+
                 MessageBox.Show("Kategoria została usunięta!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Clear();
                 GetCategory();
             }
             catch (Exception ex)
@@ -109,6 +117,10 @@ namespace Magazyn
 
         private void addUnitButton_Click(object sender, EventArgs e)
         {
+            Unit u = new Unit();
+            u.Show();
+
+            /*
             try
             {
                 if (cboUnit.Text == "")
@@ -129,6 +141,7 @@ namespace Magazyn
                 cn.Close();
                 MessageBox.Show(ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            */
         }
 
         public void GetUnit()
@@ -160,7 +173,9 @@ namespace Magazyn
                 cm.Parameters.AddWithValue("@Jednostka", cboUnit.Text);
                 cm.ExecuteNonQuery();
                 cn.Close();
+
                 MessageBox.Show("Jednostka została usunięta!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Clear();
                 GetUnit();
             }
             catch (Exception ex)
@@ -170,20 +185,44 @@ namespace Magazyn
             }
         }
 
+        public void save_barcode()
+        {
+            if (picBarcode.Image == null)
+            {
+                return;
+            }
+
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "PNG|*.png" })
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    picBarcode.Image.Save(saveFileDialog.FileName);
+                    MessageBox.Show("Zapisano!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Błąd!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
+            int barcode_length = txtCode.Text.Length;
+
             try
             {
-                if (txtCode.Text == "" || txtName.Text == "" || cboCategory.Text == "" || 
-                    cboUnit.Text == "" || (txtQty.Text == "" || txtQty.Text== "0"))
+                if ((barcode_length < 12 || barcode_length > 12) || txtName.Text == "" || cboCategory.Text == "" ||
+                    cboUnit.Text == "" || (txtQty.Text == "" || (txtQty.Text == "0")))
                 {
                     MessageBox.Show("Uzupełnij dane!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 cn.Open();
-                cm = new MySqlCommand("insert into tbl_produkt(KodKreskowy, Nazwa, Kategoria, Jednostka, Ilosc) values(@KodKreskowy, @Nazwa, @Kategoria, @Jednostka, @Ilosc)", cn);
+                cm = new MySqlCommand("insert into tbl_produkt(KodKreskowy, Nazwa, Opis, Kategoria, Jednostka, Ilosc) values(@KodKreskowy, @Nazwa, @Opis, @Kategoria, @Jednostka, @Ilosc)", cn);
                 cm.Parameters.AddWithValue("@KodKreskowy", txtCode.Text);
                 cm.Parameters.AddWithValue("@Nazwa", txtName.Text);
+                cm.Parameters.AddWithValue("@Opis", descriptionBox.Text);
                 cm.Parameters.AddWithValue("@Kategoria", cboCategory.Text);
                 cm.Parameters.AddWithValue("@Jednostka", cboUnit.Text);
                 cm.Parameters.AddWithValue("@Ilosc", double.Parse(txtQty.Text));
@@ -191,9 +230,12 @@ namespace Magazyn
                 cm.ExecuteNonQuery();
                 cn.Close();
 
+                save_barcode();
+
                 //wyczyszczenie okien po dodaniu produkty
                 MessageBox.Show("Produkt został dodany do bazy!!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Clear();
+                LoadProduct();
             }
             catch (Exception ex)
             {
@@ -209,15 +251,18 @@ namespace Magazyn
             dataGridView1.Rows.Clear();
             cn.Open();
 
-            if(cboCategorySearch.Text == "Wszystko")
+            if (cboCategorySearch.Text == "")
             {
-
-                cm = new MySqlCommand("select * from tbl_produkt where Nazwa like '%" +  txtSearch.Text + "%'", cn);
+                cm = new MySqlCommand("select * from tbl_produkt", cn);
+            }
+            else if (cboCategorySearch.Text == "Wszystko")
+            {
+                cm = new MySqlCommand("select * from tbl_produkt where Nazwa like '%" + txtSearch.Text + "%'", cn);
             }
             else
             {
                 cm = new MySqlCommand("select * from tbl_produkt where Kategoria like '" + cboCategorySearch.Text +
-                                      "' and Nazwa like '" + txtSearch.Text + "%'", cn);
+                                      "' and Nazwa like '%" + txtSearch.Text + "%'", cn);
             }
 
             dr = cm.ExecuteReader();
@@ -226,7 +271,7 @@ namespace Magazyn
                 i++;
                 dataGridView1.Rows.Add(i, dr["KodKreskowy"].ToString(), dr["Nazwa"].ToString(), dr["Ilosc"].ToString());
             }
-            
+
             cn.Close();
         }
 
@@ -239,32 +284,7 @@ namespace Magazyn
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             int i = dataGridView1.CurrentRow.Index;
-            skuCode = dataGridView1[1, i].Value.ToString(); 
-        }
-
- 
-        //wyświetlanie danych z okna wyszukiwania do okna dodawania
-        private void dataGridView1_Click(object sender, EventArgs e)
-        {
-            cn.Open();
-            cm = new MySqlCommand("select * from tbl_produkt where KodKreskowy = '" + skuCode + "'", cn);
-            dr = cm.ExecuteReader();
-            dr.Read();
-            if (dr.HasRows)
-            {
-                txtCode.Text = dr["KodKreskowy"].ToString();
-                txtName.Text = dr["Nazwa"].ToString();
-                cboCategory.Text = dr["Kategoria"].ToString();
-                cboUnit.Text = dr["Jednostka"].ToString();
-                txtQty.Text = dr["Ilosc"].ToString();
-
-                addButton.Enabled = false;
-                updateButton.Enabled = true;
-                saveButton.Enabled = false;
-                txtCode.Enabled = false;
-            }
-            dr.Close();
-            cn.Close();
+            skuCode = dataGridView1[1, i].Value.ToString();
         }
 
 
@@ -272,23 +292,23 @@ namespace Magazyn
         private void cancelButton_Click(object sender, EventArgs e)
         {
             Clear();
-          }
+        }
 
 
         //czyszczenie okien
         public void Clear()
         {
-            addButton.Enabled = true;
             saveButton.Enabled = true;
             updateButton.Enabled = true;
             deleteButton.Enabled = true;
             txtCode.Enabled = true;
 
-            cboCategory.Text = string.Empty;
-            cboUnit.Text = string.Empty;
-            txtCode.Text = string.Empty;
-            txtName.Text = string.Empty;
-            txtQty.Text = "0.00";
+            txtCode.Text = "";
+            txtName.Text = "";
+            descriptionBox.Text = "";
+            cboCategory.SelectedItem = null;
+            cboUnit.SelectedItem = null;
+            txtQty.Text = "0";
         }
 
 
@@ -299,16 +319,16 @@ namespace Magazyn
             {
                 if (MessageBox.Show("Czy chcesz edytować ten wpis?", "Magazyn Item Service", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    if (txtCode.Text == "" || txtName.Text == "" || cboCategory.Text == "" ||
-                        cboUnit.Text == "" || (txtQty.Text == "" || txtQty.Text == "0"))
+                    if (txtName.Text == "" || (txtQty.Text == ""))
                     {
                         MessageBox.Show("Uzupełnij dane!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                     cn.Open();
-                    cm = new MySqlCommand("update tbl_produkt set KodKreskowy=@KodKreskowy, Nazwa=@Nazwa, Kategoria=@Kategoria, Jednostka=@Jednostka, Ilosc=@Ilosc where KodKreskowy=@KodKreskowy", cn);
+                    cm = new MySqlCommand("update tbl_produkt set KodKreskowy=@KodKreskowy, Nazwa=@Nazwa, Opis=@Opis, Kategoria=@Kategoria, Jednostka=@Jednostka, Ilosc=@Ilosc where KodKreskowy=@KodKreskowy", cn);
                     cm.Parameters.AddWithValue("@KodKreskowy", txtCode.Text);
                     cm.Parameters.AddWithValue("@Nazwa", txtName.Text);
+                    cm.Parameters.AddWithValue("@Opis", descriptionBox.Text);
                     cm.Parameters.AddWithValue("@Kategoria", cboCategory.Text);
                     cm.Parameters.AddWithValue("@Jednostka", cboUnit.Text);
                     cm.Parameters.AddWithValue("@Ilosc", double.Parse(txtQty.Text));
@@ -318,6 +338,7 @@ namespace Magazyn
                     //wyczyszczenie okien po dodaniu produkty
                     MessageBox.Show("Dane produktu zostały zaaktualizowane!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Clear();
+                    LoadProduct();
                 }
             }
             catch (Exception ex)
@@ -347,6 +368,7 @@ namespace Magazyn
 
                     MessageBox.Show("Produkt został usunięty!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Clear();
+                    LoadProduct();
                 }
 
             }
@@ -359,15 +381,78 @@ namespace Magazyn
 
         private void cboCategorySearch_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            txtSearch.Text = "";
+            //txtSearch.Text = "";
+            LoadProduct();
         }
 
-        private void refreshButton_Click(object sender, EventArgs e)
+
+        //refresh
+        public void refreshButton_Click(object sender, EventArgs e)
         {
             Clear();
             GetUnit();
             GetCategory();
+            LoadProduct();
+        }
+
+
+        //wyświetlanie danych z okna wyszukiwania do okna dodawania
+
+
+        
+        private void txtCode_TextChanged(object sender, EventArgs e)
+        {
+            Barcode barcode = new Barcode();
+            Color foreColor = Color.Black;
+            Color backColor = Color.Transparent;
+            int barcode_length = txtCode.Text.Length;
+
+            try
+            {
+                if (barcode_length == 12)
+                {
+                    Image img = barcode.Encode(TYPE.EAN13, txtCode.Text, foreColor, backColor, 200, 70);
+                    picBarcode.Image = img;
+                }
+                else if (barcode_length > 12)
+                {
+                    picBarcode.Image = null;
+                    MessageBox.Show("Prawidłowy kod kreskowy musi posiadać 12 cyfr!", "Magazyn Item Service", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    picBarcode.Image = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Prawidłowy kod musi zawierać 12 cyfr!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+            cn.Open();
+            cm = new MySqlCommand("select * from tbl_produkt where KodKreskowy = '" + skuCode + "'", cn);
+            dr = cm.ExecuteReader();
+            dr.Read();
+            if (dr.HasRows)
+            {
+                txtCode.Text = dr["KodKreskowy"].ToString();
+                txtName.Text = dr["Nazwa"].ToString();
+                descriptionBox.Text = dr["Opis"].ToString();
+                cboCategory.Text = dr["Kategoria"].ToString();
+                cboUnit.Text = dr["Jednostka"].ToString();
+                txtQty.Text = dr["Ilosc"].ToString();
+
+                updateButton.Enabled = true;
+                saveButton.Enabled = false;
+                txtCode.Enabled = false;
+            }
+            dr.Close();
+            cn.Close();
         }
     }
 }
+
+
